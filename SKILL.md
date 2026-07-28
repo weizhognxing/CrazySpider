@@ -1,203 +1,236 @@
 ---
-name: b2b-product-intelligence
-description: Use when researching, crawling, scoring, or validating high-ticket, new, light-delivery B2B products, SaaS ideas, promotion channels, product intelligence, or information-arbitrage opportunities.
+name: paid-traffic-product-collector
+description: Use when collecting, crawling, filtering, and scoring products suitable for paid-traffic arbitrage, especially high-ticket, newly launched, non-ecommerce, B2B online software products with identifiable business customers and low trial friction.
 ---
 
-# B2B Product Intelligence
+# Paid Traffic Product Collector
 
-Use this skill to discover B2B products that match three criteria: high-ticket, newly launched or fast-emerging, and light-delivery. The goal is to continuously collect product and channel intelligence, identify information gaps, and turn the process into a repeatable methodology.
+This skill is for collecting products that may be suitable for making money through paid traffic. The workflow has two layers: hard filters and scoring. The user's standards are hard filters. If a candidate does not pass them, remove it directly. Additional standards are only scoring bonuses.
 
-## Target Definition
+## Core Goal
 
-Prioritize products with these traits:
+Find products with these properties:
 
-- High-ticket: likely ACV, monthly price, or deal size is high enough to support meaningful B2B revenue.
-- New product: recently launched, recently funded, recently trending, or recently gaining customer attention.
-- Light-delivery: software-first, self-serve, API-based, template-based, or workflow-based; avoids heavy consulting, custom implementation, physical delivery, or long deployment cycles.
-- B2B buyer: sells to companies, teams, operators, founders, marketers, sales teams, finance, HR, legal, supply chain, agencies, or developers.
-- Replicable insight: product idea, positioning, channel, or go-to-market pattern can be analyzed and reused.
+- They can be acquired through paid ads or paid traffic.
+- They have enough gross profit or lifetime value to cover ad cost.
+- They target identifiable business customers.
+- They can be delivered mostly online with low marginal cost.
+- They have a clear low-risk first action, such as trial, demo, diagnostic report, ROI calculator, pilot, or low-cost first order.
 
-## Source Matrix
+## Hard Filters
 
-Start from sources that naturally expose new product, pricing, traction, or channel signals.
+Apply these first. If any item clearly fails, reject the product and do not score it.
 
-| Source Type | Example Sources | Crawl Or Extract |
+| Filter | Required Standard | Reject If |
 | --- | --- | --- |
-| New product discovery | Product Hunt, BetaList, Hacker News Show, Launching Next | launch date, product tagline, tags, website, votes, comments |
-| Indie founders | Indie Hackers, X/Twitter build-in-public, founder blogs | MRR, launch notes, customer segment, pricing, channels |
-| Funding signals | Crunchbase, ITjuzi, 36Kr, TechCrunch funding posts | funding date, category, market, target buyer, website |
-| Software directories | G2, Capterra, SaaSworthy, AlternativeTo | category, pricing, review velocity, pain points, alternatives |
-| Open-source commercialization | GitHub Trending, GitHub topics, npm packages | stars growth, new repositories, sponsor links, hosted products |
-| Ad validation | Facebook Ad Library, Google Ads transparency, TikTok Creative Center | active ads, landing pages, copy angles, audience hints |
-| Domain and website signals | new .com/.io/.ai domains, startup directories | new domains, pricing pages, signup flow, category keywords |
+| High-ticket potential | Product has medium/high order value, enterprise pricing, annual plan, seat pricing, usage pricing, or clear upsell path | Only low-price consumer purchase or one-time small order |
+| Newly launched or emerging | Product is recently launched, recently funded, recently promoted, newly trending, or in a newly emerging category | Mature saturated product with no new angle or recent signal |
+| Non-ecommerce | Product is not a normal physical goods ecommerce item | Depends on inventory, logistics, warehousing, returns, or price-war retail |
+| B2B orientation | Product sells to companies, teams, departments, shops, agencies, schools, clinics, factories, or business operators | Mainly consumer entertainment, lifestyle, personal shopping, or pure C-end app |
+| Customer list can be built | Target customers can be found through Qichacha, Tianyancha, maps, job sites, industry directories, company websites, app stores, marketplaces, or public databases | Cannot define or locate target customers in bulk |
+| Online software or light online service | Product is software, data, automation, AI workflow, SaaS, API, plugin, template, dashboard, online tool, or standardized digital service | Requires heavy offline delivery, custom projects, hardware installation, field service, or manual agency work for each customer |
+| Low trial friction | Has free trial, demo, sandbox, free diagnosis, ROI report, pilot, low-cost first order, money-back guarantee, or result-based entry point | Customer must pay a large amount before seeing any proof |
 
-## Crawling Pipeline
+## Hard Filter Decision Output
 
-Build a crawler workflow with this sequence:
+For every collected candidate, return one of these statuses:
 
-1. Collect raw candidates from each source daily or weekly.
-2. Normalize data into a common schema: `name`, `url`, `source`, `launch_date`, `description`, `tags`, `pricing_url`, `pricing_text`, `buyer`, `delivery_type`, `evidence`, `created_at`.
-3. Fetch each candidate website, especially homepage, pricing page, docs page, changelog, case studies, and comparison pages.
-4. Extract structured signals with rules first, then use an LLM for judgment and explanation.
-5. Score candidates and store both raw evidence and final score.
-6. Push the top candidates to a report, dashboard, CSV, Feishu/WeCom/Slack bot, or Git-tracked markdown file.
+- `accepted`: passes all hard filters and should be scored.
+- `rejected`: fails one or more hard filters.
+- `uncertain`: not enough information; keep in watchlist and collect more evidence.
 
-## Scoring Rubric
+Always include the rejection reason if rejected.
 
-Score each candidate from 1 to 5 on each dimension.
+## Scoring Standards
 
-| Dimension | Score 1 | Score 3 | Score 5 |
+Only score candidates that pass the hard filters. Score each item from 1 to 5. These standards are bonuses and ranking signals, not mandatory filters.
+
+| Scoring Dimension | Score 1 | Score 3 | Score 5 |
 | --- | --- | --- | --- |
-| High-ticket potential | free/consumer/low-price | $50-$200/mo or team pricing | $200+/mo, annual contract, enterprise, demo-led |
-| Newness | mature crowded product | recent updates or recent attention | launched/funded/trending in last 90 days |
-| Light delivery | consulting, hardware, custom project | onboarding required but repeatable | self-serve SaaS/API/template/workflow product |
-| B2B fit | consumer or creator tool | prosumer/team tool | clear company buyer and business ROI |
-| Channel signal | no visible acquisition channel | organic/community/search signs | active ads, SEO moat, marketplace, directory, partner channel |
-| Information gap | obvious saturated idea | niche angle or weak competition | overlooked category with clear arbitrage potential |
+| Pain intensity | Nice-to-have | Solves a real workflow problem | Solves urgent loss, revenue, compliance, hiring, sales, or cost problem |
+| ROI clarity | Value is vague | Some efficiency value can be explained | ROI can be calculated as revenue gained, cost saved, risk reduced, or time saved |
+| Gross margin | Human-heavy or low margin | Mixed software and service | Mostly software/data/automation with high margin |
+| Sales cycle | Long approval or procurement | Some sales follow-up needed | Can convert in days or weeks through trial, demo, pilot, or founder/manager decision |
+| Decision maker clarity | Buyer unclear | Team user known but payer unclear | Clear owner, founder, department head, marketer, HR, finance, sales, legal, or operations buyer |
+| Ad message clarity | Needs long education | Can explain in a landing page | Can explain in one ad hook: who it helps, what pain it solves, what result it creates |
+| Trust assets | No proof | Some screenshots or testimonials | Has case studies, customer logos, review data, before/after results, certification, or public traction |
+| Retention potential | One-time use | Occasional repeat use | Monthly/annual recurring use with data, workflow, collaboration, or reporting lock-in |
+| Expansion potential | Single user only | Can add features | Can expand by seats, branches, stores, usage, modules, departments, or enterprise plan |
+| Delivery standardization | Mostly manual | Repeatable onboarding | Self-serve, template-based, API-based, automated, or standardized setup |
+| Migration cost | Requires major change | Needs some setup | Can run alongside current process or import data easily |
+| Channel evidence | No visible channel | Organic/community/search evidence | Competitors or product itself show active ads, SEO pages, directories, affiliate, partner, marketplace, or outbound potential |
+| Competition entry window | Overcrowded red ocean | Demand exists but positioning differs | Verified demand with weak incumbents, new regulation/platform change, or underserved niche |
+| Compliance safety | Risky claims/data/category | Manageable risk | Platform-ad-friendly, legal, privacy-safe, and low policy risk |
 
-Use this priority formula:
+## Weighted Score
+
+Use this formula after scoring:
 
 ```text
-priority_score = high_ticket * 0.25 + newness * 0.20 + light_delivery * 0.20 + b2b_fit * 0.15 + channel_signal * 0.10 + information_gap * 0.10
+traffic_fit_score =
+  pain_intensity * 0.13 +
+  roi_clarity * 0.12 +
+  gross_margin * 0.10 +
+  sales_cycle * 0.09 +
+  decision_maker_clarity * 0.08 +
+  ad_message_clarity * 0.08 +
+  trust_assets * 0.07 +
+  retention_potential * 0.08 +
+  expansion_potential * 0.07 +
+  delivery_standardization * 0.07 +
+  migration_cost * 0.04 +
+  channel_evidence * 0.04 +
+  competition_entry_window * 0.02 +
+  compliance_safety * 0.01
 ```
 
-Shortlist candidates with `priority_score >= 4.0`. Keep `3.5-4.0` as watchlist items.
+Ranking interpretation:
 
-## High-Ticket Signals
+- `4.3-5.0`: strong candidate, prioritize manual validation.
+- `3.8-4.29`: good candidate, keep and collect more proof.
+- `3.3-3.79`: watchlist, only keep if source is unique or evidence is incomplete.
+- `<3.3`: deprioritize.
 
-Look for these machine-readable or LLM-detectable signals:
+## Collection Sources
 
-- Pricing contains `$199/mo`, `$299/mo`, `$499/mo`, `$999/mo`, annual plans, seat pricing, usage pricing, or minimum contracts.
-- Website contains `Enterprise`, `Talk to Sales`, `Book a Demo`, `Request Demo`, `Contact Sales`, or `Custom Pricing`.
-- Buyer language includes `sales teams`, `HR teams`, `finance teams`, `legal teams`, `operations`, `procurement`, `compliance`, `security`, `agencies`, or `developers`.
-- Case studies mention recognizable companies, funded startups, departments, or measurable ROI.
-- Product replaces expensive labor, agency work, compliance work, sales operations, data collection, or repetitive internal workflows.
+Use sources that expose newness, pricing, buyer, channel, or traction signals.
 
-## Light-Delivery Signals
+| Source Type | Example Sources | Extracted Signals |
+| --- | --- | --- |
+| New product platforms | Product Hunt, BetaList, Hacker News Show, Launching Next | launch date, tagline, tags, comments, votes, website |
+| SaaS directories | G2, Capterra, SaaSworthy, AlternativeTo | category, pricing, reviews, competitors, pain points |
+| Founder communities | Indie Hackers, X/Twitter build-in-public, founder blogs | MRR, launch story, buyer, channel, experiments |
+| Funding/news | Crunchbase, TechCrunch, 36Kr, ITjuzi | new funding, industry, buyer, product category |
+| Ad libraries | Facebook Ad Library, Google Ads Transparency, TikTok Creative Center | active ads, landing pages, hooks, creative angles |
+| Open-source and developer ecosystems | GitHub Trending, GitHub topics, npm, Chrome Web Store, Shopify App Store, HubSpot App Marketplace | adoption, integration, marketplace demand |
+| Business customer databases | Qichacha, Tianyancha, Amap/Baidu Maps, job boards, industry associations | customer count, industry density, decision makers, company size |
+| Search and SEO | Google/Bing/Baidu SERP, comparison pages, alternative pages | demand keywords, competitor positioning, paid/organic competition |
 
-Favor products with these traits:
+## Product Evidence To Collect
 
-- Signup, free trial, demo sandbox, API key, Chrome extension, Slack app, Shopify app, HubSpot app, Zapier integration, or template library.
-- Documentation, onboarding checklist, public API docs, help center, changelog, and integration guides.
-- Core value is software automation, data enrichment, AI workflow, monitoring, reporting, scraping, matching, routing, alerting, or content transformation.
+For every candidate, collect these fields when possible:
 
-Avoid products with these signals unless there is a clear reason:
+- `name`
+- `website`
+- `source`
+- `launch_or_newness_signal`
+- `category`
+- `target_customer`
+- `decision_maker`
+- `pricing_signal`
+- `trial_or_low_risk_entry`
+- `delivery_model`
+- `customer_list_source`
+- `ad_message_hook`
+- `roi_claim`
+- `trust_assets`
+- `competitors`
+- `channel_signal`
+- `hard_filter_status`
+- `hard_filter_reasons`
+- `traffic_fit_score`
+- `next_validation_step`
 
-- `Implementation Fee`, `Professional Services`, `custom deployment`, `on-premise only`, `hardware`, `field service`, `agency service`, `done-for-you`, or heavy migration language.
-- Complex procurement or regulated deployment where the product cannot be delivered repeatedly with low marginal effort.
+## Recommended Workflow
 
-## Newness Signals
+Follow this sequence:
 
-Treat a product as new or emerging when at least one is true:
-
-- Product was launched or submitted in the last 90 days.
-- Website changelog, blog, or release notes show recent rapid iteration.
-- GitHub stars, Product Hunt votes, reviews, or social mentions show recent acceleration.
-- New funding, new team hiring, new paid ads, or new directory listings appeared recently.
-- Category is connected to a recent platform shift, policy change, API launch, AI model capability, marketplace change, or regulation.
-
-## Recommended MVP
-
-Start with a minimal crawler stack before expanding sources:
-
-1. Product Hunt daily launches: collect product names, descriptions, topics, websites, votes, and comments.
-2. G2 or Capterra category pages: collect recently reviewed tools and pain points from reviews.
-3. Indie Hackers or founder posts: collect revenue-transparent products and launch stories.
-4. Product websites: crawl homepage, pricing page, docs, changelog, case studies, and integrations.
-5. LLM scorer: return `scores`, `evidence`, `why_it_matters`, `possible_channel`, and `replication_angle`.
+1. Collect raw products from source pages or APIs.
+2. Visit each candidate's homepage, pricing page, docs, demo/trial page, case studies, integrations, and blog/changelog.
+3. Apply hard filters using evidence. Reject obvious failures immediately.
+4. Score accepted candidates using the scoring standards.
+5. Deduplicate by domain and product name.
+6. Output accepted candidates, rejected candidates, and uncertain watchlist separately.
+7. For top candidates, propose the next validation step: scrape customer list, build ad hook, inspect competitors' ads, estimate CAC/LTV, or test a landing page.
 
 ## Output Format
 
-For each candidate, produce a compact record:
+Use this table for human-readable reports:
+
+| Product | Status | Score | Target Customer | Pricing Signal | Low-Risk Entry | Customer List Source | Ad Hook | Key Reason | Next Step |
+| --- | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
+
+Use this JSON for machine-readable storage:
 
 ```json
 {
   "name": "Product Name",
-  "url": "https://example.com",
+  "website": "https://example.com",
   "source": "Product Hunt",
-  "category": "B2B SaaS",
-  "buyer": "Sales teams",
-  "pricing_signal": "$299/mo and Enterprise plan",
-  "delivery_signal": "self-serve SaaS with API docs",
-  "newness_signal": "launched this month",
-  "channel_signal": "active SEO pages and comparison pages",
-  "scores": {
-    "high_ticket": 5,
-    "newness": 5,
-    "light_delivery": 4,
-    "b2b_fit": 5,
-    "channel_signal": 4,
-    "information_gap": 4
+  "hard_filter_status": "accepted",
+  "hard_filter_reasons": {
+    "high_ticket_potential": "Enterprise plan and $299/mo team plan",
+    "newly_launched_or_emerging": "Launched within 60 days",
+    "non_ecommerce": "SaaS software, no physical delivery",
+    "b2b_orientation": "Targets sales teams",
+    "customer_list_can_be_built": "Target companies can be found via Qichacha and job postings",
+    "online_software_or_light_service": "Web app with API",
+    "low_trial_friction": "Free trial and demo sandbox"
   },
-  "priority_score": 4.6,
-  "why_it_matters": "Clear B2B pain, high willingness to pay, and self-serve delivery.",
-  "replication_angle": "Could build a niche-specific version for agencies or vertical teams."
+  "scores": {
+    "pain_intensity": 5,
+    "roi_clarity": 5,
+    "gross_margin": 5,
+    "sales_cycle": 4,
+    "decision_maker_clarity": 4,
+    "ad_message_clarity": 5,
+    "trust_assets": 3,
+    "retention_potential": 4,
+    "expansion_potential": 4,
+    "delivery_standardization": 5,
+    "migration_cost": 4,
+    "channel_evidence": 3,
+    "competition_entry_window": 4,
+    "compliance_safety": 5
+  },
+  "traffic_fit_score": 4.48,
+  "ad_message_hook": "Find missed sales leads automatically from company signals.",
+  "next_validation_step": "Check competitor ad libraries and estimate available customer count."
 }
 ```
 
-## Daily Report Template
+## Rejection Examples
 
-Use this structure for a daily or weekly intelligence report:
+Reject with clear reasons:
 
-```markdown
-# B2B Product Intelligence Report
-
-## Top Candidates
-
-| Rank | Product | Buyer | Signal | Score | Replication Angle |
-| --- | --- | --- | --- | --- | --- |
-
-## Best Channel Signals
-
-Summarize which channels appear to be working: SEO, ads, communities, directories, partnerships, marketplaces, outbound, influencer, or open source.
-
-## Methodology Notes
-
-Record which source produced useful leads, which filters failed, and which scoring rules need adjustment.
-
-## Watchlist
-
-List promising but incomplete candidates requiring follow-up.
+```json
+{
+  "name": "Candidate",
+  "hard_filter_status": "rejected",
+  "rejection_reasons": [
+    "Fails non-ecommerce filter: physical product with inventory and returns",
+    "Fails customer-list filter: target buyer cannot be found or segmented in bulk"
+  ]
+}
 ```
 
-## Implementation Guidance
+## LLM Evaluation Prompt
 
-When implementing this in code:
-
-- Use Scrapy for stable static pages and Playwright for JS-heavy websites.
-- Store raw HTML snapshots or extracted text to support later review.
-- Deduplicate by normalized domain and canonical URL.
-- Keep source-specific crawlers small; use a shared normalization and scoring layer.
-- Add polite rate limits and obey robots.txt where applicable.
-- Do not store secrets in code; use environment variables for APIs and webhook URLs.
-- Log extraction failures and keep raw candidates even if scoring fails.
-
-## LLM Scoring Prompt
-
-Use this prompt when scoring a candidate:
+Use this prompt to evaluate a product candidate:
 
 ```text
-You are evaluating a B2B product opportunity for information-arbitrage research.
+You are evaluating whether a product is suitable for making money through paid traffic.
 
-Criteria:
-1. High-ticket potential: 1-5
-2. Newness: 1-5
-3. Light-delivery fit: 1-5
-4. B2B fit: 1-5
-5. Channel signal: 1-5
-6. Information gap: 1-5
+Important rule: the user's standards are hard filters. If the product fails any hard filter, reject it directly and do not score it.
 
-Return valid JSON only. Include short evidence for every score. Penalize consumer products, low-priced tools, heavy consulting, hardware, and products requiring custom implementation.
+Hard filters:
+1. High-ticket potential
+2. Newly launched or emerging
+3. Non-ecommerce
+4. B2B orientation
+5. Customer list can be built through public/company databases
+6. Online software or light online service
+7. Low trial friction through trial, demo, diagnosis, ROI report, pilot, low-cost first order, guarantee, or result-based entry
 
-Input:
+If accepted, score these dimensions from 1 to 5:
+pain_intensity, roi_clarity, gross_margin, sales_cycle, decision_maker_clarity, ad_message_clarity, trust_assets, retention_potential, expansion_potential, delivery_standardization, migration_cost, channel_evidence, competition_entry_window, compliance_safety.
+
+Return valid JSON only. Include evidence for every hard filter and every score. Do not list unrelated products.
+
+Candidate text:
 {{candidate_text}}
 ```
 
-## Success Criteria
+## Final Principle
 
-The workflow is successful when it regularly produces:
-
-- 5-10 credible weekly candidates with clear evidence.
-- At least one repeatable source that produces high-quality leads.
-- A growing library of product categories, price signals, and channel patterns.
-- A shortlist of ideas suitable for fast validation, landing page tests, scraping prototypes, or outbound experiments.
+Do not collect broad product lists. Collect only products that pass the user's hard filters. Use scoring only to rank the survivors.
