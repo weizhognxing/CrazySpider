@@ -106,6 +106,79 @@ Use sources that expose newness, pricing, buyer, channel, or traction signals.
 | Business customer databases | Qichacha, Tianyancha, Amap/Baidu Maps, job boards, industry associations | customer count, industry density, decision makers, company size |
 | Search and SEO | Google/Bing/Baidu SERP, comparison pages, alternative pages | demand keywords, competitor positioning, paid/organic competition |
 
+## China Data Sources
+
+For the China-first MVP, prioritize domestic sources because they are easier to access from a domestic network and map directly to customer discovery, paid-traffic validation, and B2B software discovery.
+
+| Priority | Source | Use Case | Signals To Extract |
+| --- | --- | --- | --- |
+| P0 | Feishu App Directory | Find B2B online software and workplace plugins | app category, target users, install flow, trial/demo, screenshots, vendor, update recency |
+| P0 | DingTalk App Market | Find enterprise SaaS and light-delivery workflow tools | category, buyer, pricing hints, reviews, deployments, vendor profile |
+| P0 | WeCom service provider/app ecosystem | Find enterprise WeChat tools, SCRM, customer service, marketing, HR, approval workflows | product type, target company, service provider, implementation level, customer cases |
+| P0 | Qichacha / Tianyancha / AiQicha | Validate whether target customers can be found in bulk | company count, industry, region, business scope, company size, decision-maker clues |
+| P0 | Baidu / 360 / Sogou search | Find product websites, landing pages, competitors, paid search traces | keyword demand, landing pages, competitor messages, ads, SEO pages |
+| P0 | Ocean Engine / Juying / 巨量创意 / 巨量算数 | Validate paid-traffic feasibility and creative angles | active creatives, hooks, landing pages, audience angles, industry ad volume |
+| P0 | Kuaishou Magnetic Engine / 磁力引擎 | Validate short-video ad demand and creative patterns | ad creatives, selling points, landing pages, target audience |
+| P0 | WeChat Search / Official Accounts | Find new SaaS, service providers, case studies, product launches, industry articles | launch articles, customer cases, pain points, founder/company narrative |
+| P0 | 36Kr / Chuangyebang / ITjuzi | Find new companies, new funding, new B2B products, emerging categories | funding date, product category, team, buyer, market timing |
+| P1 | 5118 / Aizhan / Chinaz / Baidu Index | Validate search demand and keyword competitiveness | search volume, related keywords, competitor domains, trend, CPC clues |
+| P1 | Alibaba Cloud Marketplace / Tencent Cloud Marketplace / Huawei Cloud Marketplace | Find enterprise software, SaaS, security, data, AI, industry solutions | product category, pricing, vendor, deployment type, customer reviews, cloud integration |
+| P1 | Boss Zhipin / Lagou / Liepin | Infer business pain from hiring demand | hiring category, role pain, company type, budget signal, urgent operational needs |
+| P1 | Xiaohongshu / Douyin / Video Channels | Observe service providers, tool promotions, and ad-like content | hooks, comments, pain points, service packaging, creator distribution |
+| P2 | Zhihu / Juejin / CSDN | Validate developer tools, AI tools, data tools, and technical pain points | discussions, alternatives, adoption barriers, developer demand |
+| P2 | 人人都是产品经理 / 鸟哥笔记 / 梅花网 | Track marketing, operations, private-domain, and growth tool trends | product trends, channel strategies, conversion methods, user pain points |
+
+## China-First Source Strategy
+
+Use the domestic data sources in this order:
+
+1. Product discovery: Feishu, DingTalk, WeCom, cloud marketplaces, 36Kr, Chuangyebang, ITjuzi.
+2. Website verification: official site, pricing page, demo/trial page, help docs, customer cases, update logs.
+3. Paid-traffic validation: Ocean Engine, 巨量创意, 巨量算数, 磁力引擎, Baidu search ads, Douyin/Xiaohongshu content.
+4. Customer-list validation: Qichacha, Tianyancha, AiQicha, Amap/Baidu Maps, job boards, industry directories.
+5. Demand validation: Baidu Index, 5118, Chinaz, Aizhan, WeChat Search, Zhihu, CSDN.
+
+The preferred China-first crawl chain is:
+
+```text
+Feishu / DingTalk / WeCom / Cloud Marketplace
+  -> official website / pricing / trial / docs / case studies
+  -> Ocean Engine / Baidu / Douyin / WeChat search for paid-traffic evidence
+  -> Qichacha / Tianyancha / maps / job boards for customer-list evidence
+  -> hard filters
+  -> scoring
+  -> candidate table
+```
+
+## China MVP Scope
+
+Start with only five source groups before expanding:
+
+| Step | Source Group | Why It Comes First |
+| --- | --- | --- |
+| 1 | Feishu / DingTalk / WeCom app ecosystems | They are naturally B2B, online, software-like, and often light-delivery |
+| 2 | Product official websites | Pricing, trial, demo, docs, delivery model, and cases are usually found here |
+| 3 | Ocean Engine / 巨量创意 / Baidu search | They reveal whether similar offers can be advertised and how hooks are written |
+| 4 | Qichacha / Tianyancha / AiQicha / maps | They validate whether target customers can be collected in bulk |
+| 5 | 36Kr / ITjuzi / Chuangyebang | They provide newness, funding, and emerging-category signals |
+
+## Domestic Product Categories To Watch
+
+These categories often fit the hard filters and are good starting points for domestic collection. Still apply the hard filters before scoring.
+
+| Category | Why It Fits The Search |
+| --- | --- |
+| AI customer service / intelligent customer service | B2B, ROI is easy to explain, online delivery, clear buyer |
+| Sales leads / CRM / SCRM | Customer list can often be built from company databases; revenue value is clear |
+| Recruitment / HR efficiency tools | Hiring pain can be validated through job boards; clear HR or founder buyer |
+| Finance / tax / invoice / compliance tools | Strong recurring need and clear risk-reduction value |
+| Corporate training / employee exam systems | Customers can be segmented by industry and company size; delivery can be online |
+| Contract / legal / e-signature tools | Risk reduction and workflow efficiency are clear |
+| Data collection / business intelligence / opportunity monitoring | Fits information-arbitrage logic and has clear B2B use cases |
+| Store management / private-domain operations | Offline merchants can be found through maps and business databases |
+| WeCom / DingTalk / Feishu plugins | Platform trust, light delivery, and clear installation path |
+| Vertical industry SaaS | Narrow customer segment, clearer targeting, less competition if niche is underserved |
+
 ## Product Evidence To Collect
 
 For every candidate, collect these fields when possible:
